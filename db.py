@@ -1,18 +1,12 @@
 import pymongo
+client = pymongo.MongoClient("mongodb+srv://admin:123@cluster0.yhetv.mongodb.net/car_info?retryWrites=true&w=majority")
+db = client.car_info
 
-if __name__ == "__main__":
-    print('Hello pymongo!')
-    
-    # connecting to client
-    client = pymongo.MongoClient('mongodb://localhost:27017')
-    print(client)
-    
-    #creating database
-    db = client['cars_info']
-    
-    #creating collection
-    collection = db['collection']
-    
-    # creating sample dict 
-    dict = {'reg_number':'bcs-027','make':'toyota','owner_name':'berry','fines':False}
-    collection.insert_one(dict)
+col = db['details']
+# print(client.list_database_names())
+# print(db.list_collection_names())
+
+car_info = [{"numberplate":"abc-123","name":"abdu rozik","make":"tesla","model":2020},
+            {"numberplate":"def-456","name":"maaz jaaz","make":"toyota","model":2019}]
+x = col.insert_many(car_info)
+# print('id of inserted data is:',x)
